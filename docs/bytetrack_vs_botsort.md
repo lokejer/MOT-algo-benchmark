@@ -1,5 +1,7 @@
 # ByteTrack vs BoT-SORT: A (not deep) dive
 
+> **Historical experiment:** This document records the earlier two-tracker comparison. It has been superseded by the five-tracker study in the [main README](../README.md) and public technical paper.
+
 this experiment compared ByteTrack and BoT-SORT on the same prerecorded video. Both runs used the same YOLOv8l detector, the same person-only class filter, and the same detection confidence threshold of `0.10`. This makes the tracker the main variable being compared.
 
 the evaluation video contains 525 frames at 1920×1080 and 30 FPS. Its ground truth contains 5,325 pedestrian annotations across 26 person trajectories (stored in ground_truth.txt). Each tracker processed the complete 17.5-second video.

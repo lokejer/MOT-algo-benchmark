@@ -1,14 +1,12 @@
-"""Run a controlled ByteTrack vs BoT-SORT evaluation on one annotated video."""
+"""Run a controlled five-tracker MOT evaluation on one annotated video."""
 
 from pathlib import Path
 import time
-
 import cv2
 import numpy as np
 import pandas as pd
 from scipy.optimize import linear_sum_assignment
 import torch
-
 import config
 from detector import Detector
 
@@ -23,7 +21,11 @@ EVALUATED_CLASS_IDS = (0,)
 TRACKERS = {
     "ByteTrack": "bytetrack.yaml",
     "BoT-SORT": "botsort.yaml",
+    "TrackTrack": "tracktrack.yaml",
+    "Deep OC-SORT + ReID": "trackers/deepocsort_reid.yaml",
+    "FastTrack": "fasttrack.yaml",
 }
+
 
 DETECTION_CONFIDENCE = 0.10
 BRIGHTNESS_VALUE = config.BRIGHTNESS_CENTER
@@ -476,7 +478,7 @@ def summarize_tracker(
 
 
 def main() -> None:
-    """Execute ByteTrack followed by BoT-SORT and present one comparison DataFrame."""
+    """Execute the five configured trackers and present one comparison DataFrame."""
     if not VIDEO_PATH.exists():
         raise FileNotFoundError(
             f"Evaluation video not found: {VIDEO_PATH}\n"

@@ -28,6 +28,7 @@ build/
 # Jupyter
 .ipynb_checkpoints/
 *.ipynb
+!experiment.ipynb
 
 # ML models (large binary files — distribute separately)
 models/
@@ -66,3 +67,4 @@ prev_iter/
 *.pt
 docs/x.md
 docs/README_orig.md
+docs/MOT Algorithms for Stable Pedestrian Tracking.pdf
