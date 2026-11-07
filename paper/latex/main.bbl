@@ -1,0 +1,87 @@
+\begin{thebibliography}{11}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Bewley et~al.(2016)Bewley, Ge, Ott, Ramos, and
+  Upcroft]{bewley2016sort}
+Alex Bewley, Zongyuan Ge, Lionel Ott, Fabio Ramos, and Ben Upcroft.
+\newblock Simple online and realtime tracking.
+\newblock In \emph{IEEE International Conference on Image Processing (ICIP)},
+  pages 3464--3468, 2016.
+\newblock \doi{10.1109/ICIP.2016.7533003}.
+
+\bibitem[Wojke et~al.(2017)Wojke, Bewley, and Paulus]{wojke2017deepsort}
+Nicolai Wojke, Alex Bewley, and Dietrich Paulus.
+\newblock Simple online and realtime tracking with a deep association metric.
+\newblock In \emph{IEEE International Conference on Image Processing (ICIP)},
+  pages 3645--3649, 2017.
+\newblock \doi{10.1109/ICIP.2017.8296962}.
+
+\bibitem[Zhang et~al.(2022)Zhang, Sun, Jiang, Yu, Weng, Yuan, Luo, Liu, and
+  Wang]{zhang2022bytetrack}
+Yifu Zhang, Peize Sun, Yi~Jiang, Dongdong Yu, Fucheng Weng, Zehuan Yuan, Ping
+  Luo, Wenyu Liu, and Xinggang Wang.
+\newblock {ByteTrack}: Multi-object tracking by associating every detection
+  box.
+\newblock In \emph{European Conference on Computer Vision (ECCV)}, 2022.
+
+\bibitem[Cao et~al.(2023)Cao, Pang, Weng, Khirodkar, and Kitani]{cao2023ocsort}
+Jinkun Cao, Jiangmiao Pang, Xinshuo Weng, Rawal Khirodkar, and Kris Kitani.
+\newblock Observation-centric {SORT}: Rethinking {SORT} for robust multi-object
+  tracking.
+\newblock In \emph{IEEE/CVF Conference on Computer Vision and Pattern
+  Recognition (CVPR)}, pages 9686--9696, 2023.
+
+\bibitem[Aharon et~al.(2022)Aharon, Orfaig, and Bobrovsky]{aharon2022botsort}
+Nir Aharon, Roy Orfaig, and Ben-Zion Bobrovsky.
+\newblock {BoT-SORT}: Robust associations multi-pedestrian tracking.
+\newblock \emph{arXiv preprint arXiv:2206.14651}, 2022.
+
+\bibitem[Shim et~al.(2025)Shim, Ko, Yang, and Kim]{shim2025tracktrack}
+Kyujin Shim, Kangwook Ko, Yujin Yang, and Changick Kim.
+\newblock Focusing on tracks for online multi-object tracking.
+\newblock In \emph{IEEE/CVF Conference on Computer Vision and Pattern
+  Recognition (CVPR)}, pages 11687--11696, 2025.
+
+\bibitem[Maggiolino et~al.(2023)Maggiolino, Ahmad, Cao, and
+  Kitani]{maggiolino2023deepocsort}
+Gerard Maggiolino, Adnan Ahmad, Jinkun Cao, and Kris Kitani.
+\newblock Deep {OC-SORT}: Multi-pedestrian tracking by adaptive
+  re-identification.
+\newblock In \emph{IEEE International Conference on Image Processing (ICIP)},
+  2023.
+
+\bibitem[Hashempoor and Hwang(2025)]{hashempoor2025fasttracker}
+Hamidreza Hashempoor and Yu~Dong Hwang.
+\newblock {FastTracker}: Real-time and accurate visual tracking.
+\newblock \emph{arXiv preprint arXiv:2508.14370}, 2025.
+
+\bibitem[{Ultralytics}(2026)]{ultralytics_track}
+{Ultralytics}.
+\newblock Multi-object tracking with {Ultralytics YOLO}.
+\newblock \url{https://docs.ultralytics.com/modes/track/}, 2026.
+\newblock Ultralytics Documentation. Accessed: 10 Aug. 2026.
+
+\bibitem[Luiten et~al.(2021)Luiten, O{\v{s}}ep, Dendorfer, Torr, Geiger,
+  Leal-Taix{\'e}, and Leibe]{luiten2021hota}
+Jonathon Luiten, Aljo{\v{s}}a O{\v{s}}ep, Patrick Dendorfer, Philip Torr,
+  Andreas Geiger, Laura Leal-Taix{\'e}, and Bastian Leibe.
+\newblock {HOTA}: A higher order metric for evaluating multi-object tracking.
+\newblock \emph{International Journal of Computer Vision}, 129:\penalty0
+  548--578, 2021.
+\newblock \doi{10.1007/s11263-020-01375-2}.
+
+\bibitem[Dendorfer et~al.(2021)Dendorfer, O{\v{s}}ep, Milan, Schindler,
+  Cremers, Reid, Roth, and Leal-Taix{\'e}]{dendorfer2021motchallenge}
+Patrick Dendorfer, Aljo{\v{s}}a O{\v{s}}ep, Anton Milan, Konrad Schindler,
+  Daniel Cremers, Ian Reid, Stefan Roth, and Laura Leal-Taix{\'e}.
+\newblock {MOTChallenge}: A benchmark for single-camera multiple target
+  tracking.
+\newblock \emph{International Journal of Computer Vision}, 129:\penalty0
+  845--881, 2021.
+\newblock \doi{10.1007/s11263-020-01393-0}.
+
+\end{thebibliography}
