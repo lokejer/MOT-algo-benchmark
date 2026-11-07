@@ -122,8 +122,8 @@ def run_tracker(
                 break
             frame_number += 1
 
-            frame = cv2.add(frame, (beta, beta, beta, 0))
-            frame = cv2.GaussianBlur(frame, config.BLUR_KERNEL, 0)
+            frame = cv2.add(frame, (beta, beta, beta, 0))  # apply brightness offset
+            frame = cv2.GaussianBlur(frame, config.BLUR_KERNEL, 0)  # remove pixel noise and compression artifacts → detections jitter less betw frames
             result = detector.model.track(
                 frame,
                 device=device,
@@ -486,9 +486,10 @@ def main() -> None:
         )
 
     ground_truth = load_ground_truth(GROUND_TRUTH_PATH)
-    device = "cuda:0" if torch.cuda.is_available() else "cpu"
-    summaries = []
 
+    device = "cuda:0" if torch.cuda.is_available() else "cpu"
+
+    summaries = []
     for tracker_name, tracker_config in TRACKERS.items():
         print(f"\nRunning {tracker_name} ({tracker_config}) on {device}...")
         predictions, latencies_ms, frame_count = run_tracker(

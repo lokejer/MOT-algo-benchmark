@@ -4,6 +4,7 @@
 import cv2  # imported only for named constants like colormaps, no runtime cv2 work here
 
 MODEL_PATH  = "yolov8l.pt"    # yolov8n=fastest, yolov8s/m/l/x=progressively more accurate
+TRACKER_CONFIG = "botsort.yaml"  # switch between bot-sort, oc-sort, deep-sort etc
 CAMERA_INDEX = 0              # 0 = default webcam; 1 = external camera
 CAMERA_BACKEND = cv2.CAP_DSHOW  # reliable Windows capture backend; avoids MSMF stream failures
 

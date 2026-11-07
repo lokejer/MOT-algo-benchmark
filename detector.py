@@ -40,7 +40,13 @@ class Detector:
 
         # model.track() activates ByteTrack: assigns persistent integer IDs to objects
         # persist=True keeps tracker state alive between calls
-        results = self.model.track(frame, device=self.device, verbose=False, persist=True)
+        results = self.model.track(
+            frame, 
+            device=self.device, 
+            tracker=config.TRACKER_CONFIG,
+            verbose=False,
+            persist=True
+        )
 
         detections = []
         current_ids: set[int] = set()
