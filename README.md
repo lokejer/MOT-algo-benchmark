@@ -1,8 +1,8 @@
-# Comparing Multi-Object Tracking Algorithms for Stable Real-Time YOLOv8 Tracking
+# Multi-Object Tracking (MOT) Algorithm Benchmark
 
-A controlled empirical comparison of five multi-object tracking algorithms under a fixed YOLOv8 detection pipeline.
+A controlled, empirical comparison of 5 MOT algorithms (ByteTrack, BoT-SORT, TrackTrack, Deep OC-SORT, FastTracker) under a fixed YOLOv8 detection pipeline.  
 
-**ByteTrack | BoT-SORT | TrackTrack | Deep OC-SORT | FastTracker**
+Paper: [PDF](paper/mot-tracker-comparison.pdf)
 
 | Tracker | HOTA (%) | IDF1 (%) | Throughput (FPS) |
 |---|---:|---:|---:|
@@ -13,13 +13,13 @@ A controlled empirical comparison of five multi-object tracking algorithms under
 
 ## Key finding
 
-**TrackTrack produced the strongest overall tracking quality and identity stability. ByteTrack provided the best quality-speed balance for a 30 FPS laptop deployment.** TrackTrack reached 48.17% HOTA and 58.08% IDF1, while ByteTrack was more than twice as fast at 38.81 FPS.
+**TrackTrack produced the strongest overall tracking quality and identity stability. ByteTrack offered the best balance between quality and speed for a 30 FPS laptop deployment.** TrackTrack reached 48.17% HOTA and 58.08% IDF1, while ByteTrack was over twice as fast at 38.81 FPS.
 
 ## Experimental setup
 
 | Component | Configuration |
 |---|---|
-| Detector | Pretrained YOLOv8l |
+| Detector | YOLOv8 large |
 | Dataset | MOT17-09 pedestrian sequence |
 | Input | 525 frames, 1920x1080 at 30 FPS |
 | Class filter | COCO person class only |
@@ -27,7 +27,7 @@ A controlled empirical comparison of five multi-object tracking algorithms under
 | Inference size | 640 pixels |
 | Hardware | NVIDIA GeForce RTX 5060 Laptop GPU |
 | Evaluation | HOTA, DetA, AssA, IDF1, MOTA, ID switches, fragments, precision, recall, latency, and FPS |
-| Protocol | Fresh model and tracker state per run; first five timing samples excluded |
+| Protocol | Fresh model and tracker state per run. First five timing samples excluded (5 warmup frames for CUDA kernel) |
 
 The detector, input sequence, preprocessing, confidence threshold, class filter, and evaluation code were held constant. Only the tracking configuration changed between runs.
 
@@ -83,26 +83,6 @@ jupyter notebook experiment.ipynb
 
 Both entry points regenerate frame-level prediction CSVs, annotated videos, and `evaluation/results/tracker_comparison.csv`; the notebook also regenerates the figures. Large generated artifacts remain ignored by Git.
 
-## Repository structure
-
-```text
-.
-|-- experiment.ipynb                 # executed, reproducible five-tracker study
-|-- experiment.py                    # script version of the evaluation pipeline
-|-- detector.py                      # shared YOLO model wrapper
-|-- trackers/
-|   `-- deepocsort_reid.yaml         # custom Deep OC-SORT + ReID configuration
-|-- evaluation/
-|   |-- ground_truth.txt             # MOTChallenge-format pedestrian annotations
-|   `-- results/
-|       |-- tracker_comparison.csv   # curated aggregate result
-|       `-- figures/                 # curated README figure; other outputs ignored
-`-- docs/
-    `-- mot-algorithms-stable-pedestrian-tracking.pdf
-```
-
-The project began as a live webcam detector with a toggleable Eigen-CAM overlay. That earlier implementation remains documented in [`docs/live-webcam-xai.md`](docs/live-webcam-xai.md), but it is not part of the controlled tracker comparison.
-
 ## Limitations
 
 - The study uses one short, stationary-camera MOT17-09 sequence and one laptop environment.
@@ -111,10 +91,6 @@ The project began as a live webcam detector with a toggleable Eigen-CAM overlay.
 - Timing includes frame capture, preprocessing, detection, tracking, and result transfer, but excludes rendering and video encoding.
 - Tracker behavior depends on the installed Ultralytics implementations and their configuration defaults.
 
-## Paper
-
-The full methodology, related work, evaluation, and discussion are available in [Comparing Multi-Object Tracking Algorithms for Stable Real-Time YOLOv8 Tracking](docs/mot-algorithms-stable-pedestrian-tracking.pdf).
-
 ## Citation
 
 ```bibtex
@@ -122,6 +98,7 @@ The full methodology, related work, evaluation, and discussion are available in 
   author = {Jerome Loke},
   title = {Comparing Multi-Object Tracking Algorithms for Stable Real-Time YOLOv8 Tracking},
   year = {2026},
+  url = {https://github.com/lokejer/MOT-algo-benchmark},
   note = {Technical report and reproducible implementation}
 }
 ```

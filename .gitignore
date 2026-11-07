@@ -63,8 +63,8 @@ tempCodeRunnerFile.*
 
 
 # Misc
-prev_iter/
 *.pt
-docs/x.md
-docs/README_orig.md
-docs/MOT Algorithms for Stable Pedestrian Tracking.pdf
+*.aux
+*.out
+*.synctex.gz
+_prev_iter/

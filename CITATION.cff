@@ -1,0 +1,14 @@
+whacff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "Comparing Multi-Object Tracking Algorithms for Stable Real-Time YOLOv8 Tracking"
+type: software
+authors:
+  - family-names: Loke
+    given-names: Jerome
+date-released: 2026-11-07
+repository-code: "https://github.com/lokejer/MOT-algo-benchmark"
+keywords:
+  - multi-object tracking
+  - YOLOv8
+  - ByteTrack
+  - TrackTrack
