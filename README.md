@@ -4,16 +4,12 @@ A controlled, empirical comparison of 5 MOT algorithms (ByteTrack, BoT-SORT, Tra
 
 Paper: [PDF](paper/mot-tracker-comparison.pdf)
 
-| Tracker | HOTA (%) | IDF1 (%) | Throughput (FPS) |
-|---|---:|---:|---:|
-| **TrackTrack** | **48.17** | **58.08** | 18.51 |
-| **ByteTrack** | 44.48 | 50.69 | **38.81** |
-
 ![Quality-speed trade-off across the five evaluated trackers](evaluation/results/figures/quality_speed_tradeoff.png)
 
 ## Key finding
 
-**TrackTrack produced the strongest overall tracking quality and identity stability. ByteTrack offered the best balance between quality and speed for a 30 FPS laptop deployment.** TrackTrack reached 48.17% HOTA and 58.08% IDF1, while ByteTrack was over twice as fast at 38.81 FPS.
+**TrackTrack produced the strongest overall tracking quality and identity stability. ByteTrack offered the best balance between quality and speed for a 30 FPS laptop deployment.**  
+TrackTrack reached 48.17% HOTA and 58.08% IDF1, while ByteTrack was over twice as fast at 38.81 FPS.
 
 ## Experimental setup
 
@@ -27,17 +23,18 @@ Paper: [PDF](paper/mot-tracker-comparison.pdf)
 | Inference size | 640 pixels |
 | Hardware | NVIDIA GeForce RTX 5060 Laptop GPU |
 | Evaluation | HOTA, DetA, AssA, IDF1, MOTA, ID switches, fragments, precision, recall, latency, and FPS |
-| Protocol | Fresh model and tracker state per run. First five timing samples excluded (5 warmup frames for CUDA kernel) |
+| Protocol | Fresh model and tracker state per run. First five frames excluded from timing (CUDA kernel warmup) |
 
-The detector, input sequence, preprocessing, confidence threshold, class filter, and evaluation code were held constant. Only the tracking configuration changed between runs.
+- Fixed: detector, input sequence, preprocessing, confidence threshold, class filter, and evaluation code (`experiment.py`)  
+- Variable: tracking configuration between runs
 
 ## Trackers evaluated
 
-- **ByteTrack** performs a second association pass using lower-confidence detections, recovering partially occluded pedestrians without an appearance model.
-- **BoT-SORT** combines motion, confidence, and camera-motion compensation. Re-identification was disabled in this experiment.
-- **TrackTrack** uses track-perspective association and track-aware initialization to preserve established trajectories and suppress unnecessary new tracks.
-- **Deep OC-SORT + ReID** combines observation-centric motion correction with adaptively weighted appearance features for identity recovery after occlusion.
-- **FastTracker** adds occlusion-aware track retention and recovery to a lightweight ByteTrack-style association pipeline. The experiment configuration and saved artifacts use the tracker project's `FastTrack` identifier.
+- [ByteTrack](https://github.com/FoundationVision/ByteTrack) performs a second association pass using lower-confidence detections, recovering partially occluded pedestrians without an appearance model.
+- [BoT-SORT](https://github.com/NirAharon/BoT-SORT) combines motion, confidence, and camera-motion compensation. Re-ID (Re-identification) was disabled in this experiment.
+- [TrackTrack](https://github.com/kamkyu94/TrackTrack) uses track-perspective association and track-aware initialization to preserve established trajectories and suppress unnecessary new tracks.
+- [Deep OC-SORT + ReID](https://github.com/GerardMaggiolino/Deep-OC-SORT) combines observation-centric motion correction with adaptively weighted appearance features for identity recovery after occlusion.
+- [FastTracker](https://github.com/Hamidreza-Hashempoor/FastTracker) adds occlusion-aware track retention and recovery to a lightweight ByteTrack-style association pipeline.
 
 ## Results
 
@@ -49,13 +46,8 @@ The detector, input sequence, preprocessing, confidence threshold, class filter,
 | Deep OC-SORT + ReID | 44.66 | 52.87 | 40.79 | 47 | 62 | 29.12 | 33.63 |
 | FastTracker | 44.15 | 51.78 | 40.51 | 56 | 59 | 27.54 | 35.76 |
 
-The complete machine-readable result is available in [`tracker_comparison.csv`](evaluation/results/tracker_comparison.csv). Tracking metrics were recomputed from the saved frame-level predictions using one shared local evaluator.
-
-## Qualitative example
-
-![BoT-SORT tracking pedestrians through the MOT17-09 sequence](evaluation/bot-sort%20video%20demo.gif)
-
-This animation demonstrates persistent identities and detections over time. It is illustrative only; the full-sequence metrics above, rather than a selected clip, determine the comparison.
+The complete result is available in [`tracker_comparison.csv`](evaluation/results/tracker_comparison.csv).  
+Note: All 5 trackers were scored from their saved frame-level predictions by the same evaluation code in `experiment.py`, which follows the TrackEval formulas but omits the official MOTChallenge ignore-region handling. Thus, the scores are valid for comparing these trackers with each other, not with the public MOTChallenge leaderboard.
 
 ## Reproducing the experiment
 
@@ -67,11 +59,10 @@ python -m venv .venv
 python -m pip install -r requirements.txt
 ```
 
-The pretrained `yolov8l.pt` checkpoint is not committed. Download it separately and place it in the repository root. The MOT17-09 video is also not redistributed; place the sequence at the path expected by the experiment:
-
-```text
-evaluation/stationary_webcam_eval.mp4
-```
+Next:
+1. Download yolov8l.pt into the repo root (or let Ultralytics fetch it).
+2. Download MOT17 and run python scripts/make_mot17_video.py path/to/MOT17-09-FRCNN.
+3. Run python experiment.py.
 
 The matching pedestrian ground truth is provided at `evaluation/ground_truth.txt`. Run either the script or the executed notebook:
 
@@ -81,15 +72,15 @@ python experiment.py
 jupyter notebook experiment.ipynb
 ```
 
-Both entry points regenerate frame-level prediction CSVs, annotated videos, and `evaluation/results/tracker_comparison.csv`; the notebook also regenerates the figures. Large generated artifacts remain ignored by Git.
+Both entry points regenerate frame-level prediction CSVs, annotated videos, and `evaluation/results/tracker_comparison.csv`.
 
 ## Limitations
 
-- The study uses one short, stationary-camera MOT17-09 sequence and one laptop environment.
-- The local evaluator does not reproduce official MOTChallenge distractor and ignore-region handling, so these are controlled relative results rather than official leaderboard scores.
-- Each tracker was timed once; repeated runs would better characterize runtime variance.
-- Timing includes frame capture, preprocessing, detection, tracking, and result transfer, but excludes rendering and video encoding.
-- Tracker behavior depends on the installed Ultralytics implementations and their configuration defaults.
+- The study uses one short, stationary-camera MOT17-09 sequence and one laptop environment
+- The local evaluator does not reproduce official MOTChallenge distractor and ignore-region handling, so these are controlled relative results rather than official leaderboard scores
+- Each tracker was only timed once
+- Timing includes frame capture, preprocessing, detection, tracking, and result transfer, but excludes rendering and video encoding
+- Tracker behavior depends on the installed Ultralytics implementations and their configuration defaults
 
 ## Citation
 
